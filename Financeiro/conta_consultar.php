@@ -1,3 +1,11 @@
+<?php
+
+require_once 'c:/xampp2/htdocs/ControleFinanceiroEADquarta/dao/ContaDAO.php';
+$objdao = new ContaDAO();
+$contas = $objdao->ConsultarConta();
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
@@ -44,19 +52,25 @@ include_once '_head.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Banco</td>
-                                                <td>Número da Agência</td>
-                                                <td>Número da Conta</td>
-                                                <td>Saldo da Conta</td>
-                                                <td>
-                                                    <a href="conta_alterar.php" class="btn btn-warning btn-xs">Alterar</a>
-                                                </td>
+                                            <?php
+                                            $total = 0;
+                                            for ($i = 0; $i < count($contas); $i++) {
+                                                $total = $total + $contas[$i]['saldo'];
+                                            ?>
+                                                <tr class="odd gradeX">
+                                                    <td><?= $contas[$i]['banco'] ?></td>
+                                                    <td><?= $contas[$i]['agencia'] ?></td>
+                                                    <td><?= $contas[$i]['numero_conta'] ?></td>
+                                                    <td>R$ <?= $contas[$i]['saldo'] ?></td>
+                                                    <td>
+                                                        <a href="conta_alterar.php?cod=<?= $contas[$i]['id_conta'] ?>" class="btn btn-warning btn-xs">Alterar</a>
+                                                    </td>
 
-                                            </tr>
-
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
+                                    <center><b>TOTAL: R$</b> <?= $total ?></center>
                                 </div>
 
                             </div>

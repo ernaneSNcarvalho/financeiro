@@ -1,3 +1,12 @@
+<?php
+
+require_once 'c:/xampp2/htdocs/ControleFinanceiroEADquarta/dao/EmpresaDAO.php';
+$objdao = new EmpresaDAO();
+$empresas = $objdao->ConsultarEmpresa();
+
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
@@ -16,6 +25,9 @@ include_once '_head.php';
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
+                        <?php
+                        include_once '_msg.php';
+                        ?>
                         <h2>Consultar Empresa</h2>
                         <h5>Aqui você poderá consultar/alterar suas empresas cadastradas </h5>
 
@@ -44,16 +56,20 @@ include_once '_head.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>(Nome)</td>
-                                                <td>Telefone</td>
-                                                <td>Endereço</td>
-                                                <td>
-                                                    <a href="empresa_alterar.php" class="btn btn-warning btn-xs">Alterar</a>
-                                                </td>
+                                            <?php
+                                            for ($i = 0; $i < count($empresas); $i++) {
 
-                                            </tr>
+                                            ?>
+                                                <tr class="odd gradeX">
+                                                    <td><?= $empresas[$i]['nome_empresa'] ?></td>
+                                                    <td><?= $empresas[$i]['telefone_empresa'] ?></td>
+                                                    <td><?= $empresas[$i]['endereco_empresa'] ?></td>
+                                                    <td>
+                                                        <a href="empresa_alterar.php?cod=<?= $empresas[$i]['id_empresa'] ?>" class="btn btn-warning btn-xs">Alterar</a>
+                                                    </td>
 
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

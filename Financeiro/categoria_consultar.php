@@ -1,3 +1,13 @@
+<?php
+
+require_once 'c:/xampp2/htdocs/ControleFinanceiroEADquarta/dao/CategoriaDAO.php';
+
+$objdao = new CategoriaDAO();
+$categorias = $objdao->ConsultarCategoria();
+
+
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
@@ -16,6 +26,9 @@ include_once '_head.php';
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
+                        <?php
+                        include_once '_msg.php';
+                        ?>
                         <h2>Consultar Categoria</h2>
                         <h5>Aqui você poderá consultar/alterar suas categorias cadastradas </h5>
 
@@ -42,14 +55,17 @@ include_once '_head.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>(Nome)</td>
-                                                <td>
-                                                    <a href="categoria_alterar.php" class="btn btn-warning btn-xs">Alterar</a>
-                                                </td>
+                                            <?php
+                                            for ($i = 0; $i < count($categorias); $i++) {
+                                            ?>
+                                                <tr class="odd gradeX">
+                                                    <td><?= $categorias[$i]['nome_categoria'] ?></td>
+                                                    <td>
+                                                        <a href="categoria_alterar.php?cod=<?= $categorias[$i]['id_categoria'] ?>" class="btn btn-warning btn-xs">Alterar</a>
+                                                    </td>
 
-                                            </tr>
-
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,3 +1,16 @@
+<?php
+require_once '../dao/ContaDAO.php';
+
+if (isset($_POST['btn-cadastrar'])) {
+    $nome = $_POST['nome'];
+    $numero = $_POST['numero'];
+    $agencia = $_POST['agencia'];
+    $saldo = $_POST['saldo'];
+    $dao = new ContaDAO();
+    $ret = $dao->CadastrarConta($nome, $agencia, $numero,  $saldo);
+}
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
@@ -16,6 +29,9 @@ include_once '_head.php';
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
+                        <?php
+                        include_once '_msg.php';
+                        ?>
                         <h2>Nova Conta</h2>
                         <h5>Aqui você poderá cadastrar suas contas personalizadas </h5>
 
@@ -25,29 +41,32 @@ include_once '_head.php';
                 <hr />
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Nome do Banco</label>
-                        <input class="form-control" placeholder="Exemplo: Itau ..." />
+                        <form action="conta_nova.php" method="POST">
+                            <label>Nome do Banco</label>
+                            <input id="banco" name="nome" class="form-control" placeholder="Exemplo: Itau ..." />
                     </div>
 
                     <div class="form-group">
                         <label>Agência </label>
-                        <input class="form-control" placeholder="Digite aqui ..." />
+                        <input id="agencia" name="agencia" class="form-control" placeholder="Digite aqui ..." />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Número da Conta </label>
-                        <input class="form-control" placeholder="Digite aqui ..." />
+                        <input id="conta" name="numero" class="form-control" placeholder="Digite aqui ..." />
                     </div>
 
                     <div class="form-group">
                         <label>Saldo da Conta </label>
-                        <input class="form-control" placeholder="Digite aqui ..." />
+                        <input id="saldo" name="saldo" class="form-control" placeholder="Digite aqui ..." />
                     </div>
+
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <button onclick="return ValidarCamposConta()" name="btn-cadastrar" type="submit" class="btn btn-success">Cadastrar</button>
                 </div>
+                </form>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
