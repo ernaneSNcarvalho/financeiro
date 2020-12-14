@@ -52,7 +52,7 @@ if (isset($_GET['close']) && $_GET["close"] == 1) {
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-sitemap fa-3x"></i>Meus Movimentos<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-money"></i>Meus Movimentos<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="movimento_lancar.php">Lançar Movimento</a>
